@@ -29,7 +29,7 @@ public class UserBO {
 		// 암호화
 		String encryptPassword = EncryptUtils.md5(password);
 		
-		return userDAO.selectUser(loginId, password);
+		return userDAO.selectUser(loginId, encryptPassword);
 	}
 
 }
