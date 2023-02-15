@@ -7,22 +7,57 @@
   <mapper namespace="com.yjh.memo.post.dao.PostDAO">
   
 	  <insert id="insertPost" parameterType="map">
-	  	INSERT INTO
-	  		`post`	
-	  	(
-	  		`userId`
-	  		, `title`
-	  		, `content`
-	  		, `createdAt`
-	  		, `updatedAt`
-	  	)
-	  	VALUE
-	  	(
-	  		#{userId}
-	  		, #{title}
-	  		, #{content}
-	  		, now()
-	  		, now()	
-	  	)
+		  	INSERT INTO 
+				`post`
+			(
+				`userId`
+				, `title`
+				, `content`
+				, `imagePath`
+				, `createdAt`
+				, `updatedAt`
+			)
+			VALUE 
+			(
+				#{userId}
+				, #{title}
+				, #{content}
+				, #{imagePath}
+				, now()
+				, now()
+			)
 	  </insert>
+	  
+	  <select id="selectPostList" resultType="com.yjh.memo.post.model.Post">
+		  	SELECT
+				`id` 
+				,`userId`
+				, `title`
+				, `content`
+				, `imagePath`
+				, `createdAt`
+				, `updatedAt`
+			FROM 
+				`post`
+			WHERE
+				`userId` = #{userId}
+			ORDER BY
+				`id` DESC;
+	  </select>
+	  
+	  <select id="selectPost" parameterType="int"
+	  resultType="com.yjh.memo.post.model.Post">
+		  	SELECT
+				`id` 
+				,`userId`
+				, `title`
+				, `content`
+				, `imagePath`
+				, `createdAt`
+				, `updatedAt`
+			FROM 
+				`post`
+			WHERE
+				`id` = #{postId}
+	  </select>
   </mapper>
