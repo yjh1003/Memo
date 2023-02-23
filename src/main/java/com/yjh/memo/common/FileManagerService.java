@@ -58,4 +58,43 @@ public class FileManagerService {
 		
 		
 	}
+	
+	// 파일 삭제 메소드
+	public static boolean removeFile(String filePath) { // /images/2_1677137288573/couple-7061929_960_720.jpg
+		// 삭제 경로 /images 를 제거하고
+		// 실제 파일 저장 경로에 이어 붙여 준다.
+		// C:\\허예진\\springProject\\upload\\images/2_1677137288573/couple-7061929_960_720.jpg
+		
+		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/images", "");
+		Path path = Paths.get(realFilePath);
+		
+		// 파일이 존재하는지
+		if(Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+
+				e.printStackTrace();
+				
+				return false;
+			}
+		}
+		
+		// C:\\허예진\\springProject\\upload\\images/2_1677137288573
+		// 디렉토리 경로
+		Path dirPath = path.getParent();
+		// 디렉토리 존재 하는지
+		if(Files.exists(dirPath)) {
+			try {
+				Files.delete(dirPath);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+				
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }
