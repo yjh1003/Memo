@@ -43,6 +43,7 @@
 		</section>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		
+		
 	</div>
 	<script>
 		$(document).ready(function() {
